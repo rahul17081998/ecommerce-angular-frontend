@@ -11,11 +11,20 @@ import { ProductCategory } from '../common/product-category';
 export class ProductService {
 
 
+
   private baseUrl = 'http://localhost:8080/api/products';
   private categoryUrl='http://localhost:8080/api/product-category';
 
   constructor(private httpClient: HttpClient) {}
 
+
+  // get the product detail with the id [return 1 product]
+  getProductWithGivenId(theProductId: number): Observable<Product> {
+    // build url based on product id
+    const productUrl = `${this.baseUrl}/${theProductId}`;
+    return this.httpClient.get<Product>(productUrl);
+    
+  }
 
 
   searchProducts(theKeyWord: string): Observable<Product[]> {
